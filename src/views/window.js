@@ -24,7 +24,8 @@ function($, Backbone, _, ui, jqwindow){
 				afterMinimize: function(){_this.afterMinimize();},
 				afterMaximize: function(){_this.resizeStop();},
 				afterCascade: function(){_this.afterCascade();},
-				afterDrag: function(){_this.dragStop();}
+				afterDrag: function(){_this.dragStop();},
+				onClose: function(){_this.onClose();}
 			});
 			this.el = this.w.getContainer()[0];
 			$(this.el).addClass("window");
@@ -59,6 +60,11 @@ function($, Backbone, _, ui, jqwindow){
 		afterMinimize: function(){
 			this.trigger('minimize');
 			$(this.el).addClass('minimized');
+		},
+
+		onClose: function(){
+			this.trigger('close');
+			this.remove();
 		},
 
 		getBody: function(){
