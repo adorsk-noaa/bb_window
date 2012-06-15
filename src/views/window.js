@@ -21,9 +21,10 @@ function($, Backbone, _, ui, jqwindow){
 				"title": this.model.get('title'),
 				onResize: function(){ _this.resize();},
 				afterResize: function(){_this.resizeStop();},
-				afterMinimize: function(){_this.resizeStop();},
+				afterMinimize: function(){_this.afterMinimize();},
 				afterMaximize: function(){_this.resizeStop();},
-				afterCascade: function(){_this.resizeStop();}
+				afterCascade: function(){_this.afterCascade();},
+				afterDrag: function(){_this.dragStop();}
 			});
 			this.el = this.w.getContainer()[0];
 			$(this.el).addClass("window");
@@ -44,6 +45,20 @@ function($, Backbone, _, ui, jqwindow){
 				this.unsetHeightWidth(this.el);
 				this.unsetHeightWidth(this.w.getFrame());
 			}
+		},
+
+		dragStop: function(){
+			this.trigger('dragStop');
+		},
+
+		afterCascade: function(){
+			this.resizeStop();
+			$(this.el).removeClass('minimized');
+		},
+
+		afterMinimize: function(){
+			this.trigger('minimize');
+			$(this.el).addClass('minimized');
 		},
 
 		getBody: function(){
