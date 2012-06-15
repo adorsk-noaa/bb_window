@@ -1,7 +1,9 @@
 define([
+	"./window"
 ], 
-function(){
+function(WindowView){
 	views = {
+		"WindowView": WindowView
 	};
 	return views;
 });
