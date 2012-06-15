@@ -19,9 +19,11 @@ function($, Backbone, _, ui, jqwindow){
 			var _this = this;
 			this.w = $.window({
 				"title": this.model.get('title'),
-				beforeResize: function(){_this.onResizeStart();},
-				onResize: function(){_this.onResize();},
-				afterResize: function(){_this.onResizeStop();}
+				onResize: function(){ _this.resize();},
+				afterResize: function(){_this.resizeStop();},
+				afterMinimize: function(){_this.resizeStop();},
+				afterMaximize: function(){_this.resizeStop();},
+				afterCascade: function(){_this.resizeStop();}
 			});
 			this.el = this.w.getContainer()[0];
 			$(this.el).addClass("window");
@@ -31,15 +33,12 @@ function($, Backbone, _, ui, jqwindow){
 			}
 		},
 
-		onResizeStart: function(){
-			this.trigger('resizeStart');
-		},
-
-		onResize: function(){
+		resize: function(){
 			this.trigger('resize');
 		},
 
-		onResizeStop: function(){
+		resizeStop: function(){
+			this.resize();
 			this.trigger('resizeStop');
 			if (this.model.get('inline-block')){
 				this.unsetHeightWidth(this.el);
