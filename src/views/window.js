@@ -25,7 +25,7 @@ function($, Backbone, _, ui, jqwindow){
 				afterMaximize: function(){_this.resizeStop();},
 				afterCascade: function(){_this.afterCascade();},
 				afterDrag: function(){_this.dragStop();},
-				onClose: function(){_this.onClose();}
+				onClose: function(){_this.onClose();},
 			});
 			this.el = this.w.getContainer()[0];
 			$(this.el).addClass("window");
