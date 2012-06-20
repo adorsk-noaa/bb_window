@@ -18,6 +18,8 @@ function($, Backbone, _, ui, jqwindow){
 			}
 			var _this = this;
 			this.w = $.window(_.extend({
+				maxHeight: -1,
+				maxWidth: -1
 			}, 
 			{
 				onResize: function(){ _this.resize();},
