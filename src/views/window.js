@@ -17,7 +17,9 @@ function($, Backbone, _, ui, jqwindow){
 				this.model = new Backbone.Model();
 			}
 			var _this = this;
-			this.w = $.window(_.extend({}, this.model.toJSON(),{
+			this.w = $.window(_.extend({
+			}, 
+			{
 				onResize: function(){ _this.resize();},
 				afterResize: function(){_this.resizeStop();},
 				afterMinimize: function(){_this.afterMinimize();},
@@ -25,7 +27,10 @@ function($, Backbone, _, ui, jqwindow){
 				afterCascade: function(){_this.afterCascade();},
 				afterDrag: function(){_this.dragStop();},
 				onClose: function(){_this.onClose();},
-			}));
+			}, 
+			this.model.toJSON()
+			));
+
 			this.el = this.w.getContainer()[0];
 			$(this.el).addClass("window");
 
