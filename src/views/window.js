@@ -52,10 +52,12 @@ function($, Backbone, _, ui, jqwindow){
 				this.unsetHeightWidth(this.el);
 				this.unsetHeightWidth(this.w.getFrame());
 			}
+            this.updateDimensionsPosition();
 		},
 
 		dragStop: function(){
 			this.trigger('dragStop');
+            this.updateDimensionsPosition();
 		},
 
 		afterCascade: function(){
@@ -76,6 +78,18 @@ function($, Backbone, _, ui, jqwindow){
 		getBody: function(){
 			return this.w.getFrame();
 		},
+
+        // Sync model attributes with current dimensions and position.
+        updateDimensionsPosition: function(opts){
+            var pos = this.w.getPosition();
+            var dimensions = this.w.getDimensions();
+            this.model.set({
+                width: dimensions.w,
+                height: dimensions.h,
+                x: pos.x,
+                y: pos.y
+            }, opts);
+        },
 
 		unsetHeightWidth: function(el){
 			$(el).css('width', '');
