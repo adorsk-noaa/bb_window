@@ -12,12 +12,18 @@ function($, Backbone, _, ui, jqwindow){
 		tagName: "div",
 		events: {},
 
-		initialize: function(){
+		initialize: function(opts){
+            opts = opts || {};
+
 			if (! this.model){
 				this.model = new Backbone.Model();
 			}
 			var _this = this;
-			this.w = $.window(_.extend({
+
+            // Set caller element.
+            var $caller = opts.caller || $;
+
+			this.w = $caller.window(_.extend({
 				maxHeight: -1,
 				maxWidth: -1
 			}, 
@@ -30,6 +36,7 @@ function($, Backbone, _, ui, jqwindow){
 				afterDrag: function(){_this.dragStop();},
 				onClose: function(){_this.onClose();},
 			}, 
+            opts,
 			this.model.toJSON()
 			));
 
