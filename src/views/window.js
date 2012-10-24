@@ -1,8 +1,8 @@
 define([
 	"jquery",
-	"use!backbone",
-	"use!underscore",
-	"use!ui",
+	"backbone",
+	"underscore",
+	"ui",
 	"jqwindow",
 		],
 function($, Backbone, _, ui, jqwindow){
