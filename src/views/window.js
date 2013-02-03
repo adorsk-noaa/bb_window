@@ -35,7 +35,7 @@ function($, Backbone, _, ui, jqwindow){
         afterMinimize: function(){_this.afterMinimize();},
         afterMaximize: function(){_this.resizeStop();},
         afterCascade: function(){_this.afterCascade();},
-        afterDrag: function(){_this.dragStop();},
+        afterDrag: function(){_this.afterDrag();},
         onClose: function(){_this.onClose();},
       },
       opts,
@@ -69,7 +69,7 @@ function($, Backbone, _, ui, jqwindow){
       });
     },
 
-    dragStop: function(){
+    afterDrag: function(){
       this.trigger('dragStop');
       this.updateDimensionsPosition();
     },
